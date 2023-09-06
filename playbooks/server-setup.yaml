@@ -1,5 +1,5 @@
----
-- hosts: all
+- name: Initial server setup
+  hosts: all
   become: true
   vars:
     created_username: username
