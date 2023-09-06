@@ -9,7 +9,7 @@
       file:
         path: /var/lib/apt/lists
         recurse: yes
-        state: absent
+        state: directory
 
     - name: Install aptitude
       apt:
