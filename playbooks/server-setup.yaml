@@ -5,6 +5,12 @@
     - vars/initialize.yaml
 
   tasks:
+    - name: Remove directory
+      file:
+        path: /var/lib/apt/lists
+        recurse: yes
+        state: absent
+
     - name: Install aptitude
       apt:
         name: aptitude
