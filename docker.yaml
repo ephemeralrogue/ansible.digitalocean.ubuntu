@@ -1,8 +1,12 @@
-hosts: all
-become: true
+---
+- hosts: all
+  become: true
+  var:
+    altered_user: username
 
+  tasks:
 #Update apt and install system packages
-  - name: Update apt and install required system packages
+    - name: Update apt and install required system packages
       apt:
         pkg:
           - python3-pip
@@ -11,7 +15,7 @@ become: true
         update_cache: true
 
 #Install Docker
-  - name: Add Docker GPG apt Key
+    - name: Add Docker GPG apt Key
       apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
         state: present
@@ -23,7 +27,12 @@ become: true
 
     - name: Update apt and install docker-ce
       apt:
-        name: docker-ce
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
         state: latest
         update_cache: true
 
@@ -31,10 +40,15 @@ become: true
       pip:
         name: docker
 
-  - name: Add "{{ created_username }}" user to "docker" group
+    - name: Add "{{ altered_user }}" user to "docker" group
       user:
-        name: "{{ created_username }}"
-        group: "docker"
+        name: "{{ altered_user }}"
+        groups: "docker"
         append: yes
-      tags:
-        - docker
+
+#Install Docker Compse
+    - name: Install docker-compose
+      get_url:
+        url: https://github.com/docker/compose/releases/download/v2.21.0/docker-compose-linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: '755'
