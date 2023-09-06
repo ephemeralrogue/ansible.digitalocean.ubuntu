@@ -42,12 +42,14 @@
     
     - name: Copy ssh keys to remote user
       ansible.posix.synchronize:
-        user: root
-        archive: true
         src: ~/.ssh
         dest: /home/"{{ created_username }}"
+    
+    - name: Change .ssh folder permissions
+      file:
+        path: /home/"{{ created_username }}" 
         owner: "{{ created_username }}"
-        groups: "{{ created_username }}"
+        group: "{{ created_username }}"
         mode: 0700
     
     - name: Disable password authentication for root
