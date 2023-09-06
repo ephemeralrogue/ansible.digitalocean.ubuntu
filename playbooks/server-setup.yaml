@@ -1,8 +1,8 @@
 - name: Initial server setup
   hosts: all
   become: true
-  vars:
-    created_username: username
+  vars_files:
+    - vars/initialize.yaml
 
   tasks:
     - name: Install aptitude
