@@ -1,0 +1,12 @@
+hosts: all
+become: true
+
+#Install node.js and nvm
+  - name: Install nvm
+    shell: >
+      curl https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh | sh
+      creates=/home/{{ ansible_user_id }}/.nvm/nvm.sh
+  - name: Install node and set version
+    shell: >
+      /bin/bash -c "source ~/.nvm/nvm.sh && nvm install 18.12.0 && nvm alias default 18.12.0"
+      creates=/home/{{ ansible_user_id }}/.nvm/alias
