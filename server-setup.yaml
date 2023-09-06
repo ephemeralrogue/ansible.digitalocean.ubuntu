@@ -1,24 +1,25 @@
-hosts: all
-become: true
-vars:
-  created_username: username
+---
+- hosts: all
+  become: true
+  vars:
+    created_username: username
 
-tasks:
-  - name: Install aptitude
+  tasks:
+    - name: Install aptitude
       apt:
         name: aptitude
         state: latest
         update_cache: true
 
-  - name: Setup passwordless sudo
-    lineinfile:
-      path: /etc/sudoers
-      state: present
-      regexp: '^%sudo'
-      line: '%sudo ALL=(ALL) NOPASSWD: ALL'
-      validate: '/usr/sbin/visudo -cf %s'
+    - name: Setup passwordless sudo
+      lineinfile:
+        path: /etc/sudoers
+        state: present
+        regexp: '^%sudo'
+        line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+        validate: '/usr/sbin/visudo -cf %s'
 
-  - name: Create a new regular user with sudo privileges
+    - name: Create a new regular user with sudo privileges
       user:
         name: "{{ created_username }}"
         state: present
@@ -26,11 +27,11 @@ tasks:
         append: true
         create_home: true
 
-  - name: Set authorized key for remote user
+    - name: Set authorized key for remote user
       ansible.posix.authorized_key:
         user: "{{ created_username }}"
         state: present
-        key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_rsa.pub') }}"
+        key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_ed25519.pub') }}"
 
     - name: Disable password authentication for root
       lineinfile:
@@ -39,20 +40,13 @@ tasks:
         regexp: '^#?PermitRootLogin'
         line: 'PermitRootLogin prohibit-password'
 
-#Update apt and install system packages
-  - name: Update apt and install required system packages
-      apt:
-        pkg:
-          - python3-pip
-          - virtualenv
-        state: latest
-        update_cache: true
+#Setup Firewall
+    - name: UFW - Allow SSH connections
+      community.general.ufw:
+        rule: allow
+        name: OpenSSH
 
-#Install Docker
-  - name: Add Docker GPG apt Key
-      apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
-
-^G Help         ^O Write Out    ^W Where Is     ^K Cut          ^T Execute      ^C Location     M-U Undo        M-A Set Mark    M-] To Bracket  M-Q Previous
-^X Exit         ^R Read File    ^\ Replace      ^U Paste        ^J Justify      ^/ Go To Line   M-E Redo        M-6 Copy        ^Q Where Was    M-W Next
+    - name: UFW - Enable and deny by default
+      community.general.ufw:
+        state: enabled
+        default: deny
