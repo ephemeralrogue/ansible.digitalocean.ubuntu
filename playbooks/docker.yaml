@@ -1,8 +1,8 @@
----
-- hosts: all
+- name: Install Docker and docker-compose
+  hosts: all
   become: true
-  var:
-    altered_user: username
+  vars:
+    altered_user: {{ item }}
 
   tasks:
 #Update apt and install system packages
