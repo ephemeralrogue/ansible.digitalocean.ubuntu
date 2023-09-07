@@ -46,6 +46,7 @@
         dest: /home/{{ created_username }}
         rsync_opts:
           - "--chown={{ created_username}}:{{ created_username }}"
+      delegate_to: "{{ inventory_hostname }}"
     
 #    - name: Change .ssh folder permissions
 #      file:
