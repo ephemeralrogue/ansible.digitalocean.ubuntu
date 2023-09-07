@@ -9,6 +9,4 @@
 #      shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
     
     - name: Install node and set version
-      shell: nvm install --lts
-      args:
-        executable: /bin/bash
+      command: nvm install --lts
