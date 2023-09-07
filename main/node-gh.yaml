@@ -2,9 +2,8 @@
   hosts: all
 
 - name: import nvm and node playbook
-  import_playbook: ./playbooks/nvm-node.yaml
+  import_playbook: ../playbooks/nvm-node.yaml
 
-- name: import gh playbook
-  import_playbook: ./playbooks/gh.yaml
+
 
   
