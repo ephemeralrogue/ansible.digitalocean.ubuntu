@@ -5,10 +5,8 @@
 
   tasks:
 #Install node.js and nvm
-    - name: Install nvm
-      shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+#    - name: Install nvm
+#      shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
     
-#    - name: Install node and set version
-#      shell: >
-#        /bin/bash -c "source ~/.nvm/nvm.sh && nvm install 18.12.0 && nvm alias default 18.12.0"
-#        creates=/home/{{ altered_user }}/.nvm/alias
+    - name: Install node and set version
+      shell: nvm install node
