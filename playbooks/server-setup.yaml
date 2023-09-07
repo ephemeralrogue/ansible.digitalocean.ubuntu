@@ -5,6 +5,12 @@
     - vars/initialize.yaml
 
   tasks:
+    - name: Remove directory
+      file:
+        path: /var/lib/apt/lists
+        recurse: yes
+        state: directory
+
     - name: Install aptitude
       apt:
         name: aptitude
@@ -33,7 +39,7 @@
         user: "{{ created_username }}"
         state: present
         key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_ed25519.pub') }}"
-
+    
     - name: Disable password authentication for root
       lineinfile:
         path: /etc/ssh/sshd_config
