@@ -48,7 +48,7 @@
     
     - name: Change .ssh folder permissions
       file:
-        path: /home/"{{ created_username }}"/.ssh
+        path: /home/{{ created_username }}/.ssh
         owner: "{{ created_username }}"
         group: "{{ created_username }}"
         mode: 0700
