@@ -44,16 +44,14 @@
       ansible.posix.synchronize:
         src: ~/.ssh
         dest: /home/{{ created_username }}
-        rsync_opts:
-          - "--chown={{ created_username}}:{{ created_username }}"
       delegate_to: "{{ inventory_hostname }}"
     
-#    - name: Change .ssh folder permissions
-#      file:
-#        path: /home/"{{ created_username }}" 
-#        owner: "{{ created_username }}"
-#        group: "{{ created_username }}"
-#        mode: 0700
+    - name: Change .ssh folder permissions
+      file:
+        path: /home/"{{ created_username }}"/.ssh
+        owner: "{{ created_username }}"
+        group: "{{ created_username }}"
+        mode: 0700
     
     - name: Disable password authentication for root
       lineinfile:
