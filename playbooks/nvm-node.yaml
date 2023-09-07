@@ -5,8 +5,10 @@
 
   tasks:
 #Install node.js and nvm
-#    - name: Install nvm
-#      shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
-    
+    - name: Install nvm
+      shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+      args:
+        creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+
     - name: Install node and set version
       command: nvm install --lts
