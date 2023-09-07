@@ -11,4 +11,4 @@
         creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
 
     - name: Install node and set version
-      command: nvm install --lts
+      shell: /bin/bash -c "source ~/.nvm/nvm.sh && nvm install 18.12.0"
