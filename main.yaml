@@ -1,5 +1,7 @@
 - name: Execute initial server setup, Docker install, nvm and node install
   hosts: all
+  vars_files:
+    playbooks/vars/initialize.yaml
 
 - name: import server setup playbook
   import_playbook: playbooks/server-setup.yaml
@@ -9,3 +11,4 @@
 
 - name: import nvm and node playbook
   import_playbook: playbooks/nvm-node.yaml
+  become_user: "{{ altered_user }}"
