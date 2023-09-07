@@ -1,5 +1,6 @@
 - name: Install GitHub CLI
   hosts: all
+  become: true
 
   tasks:
 #    - name: Install gh
