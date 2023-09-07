@@ -1,16 +1,16 @@
 - name: Install NVM and node.js
   hosts: all
-  become: true
   vars_files:
     - vars/initialize.yaml
 
   tasks:
 #Install node.js and nvm
     - name: Install nvm
-      shell: >
-        curl https://raw.githubusercontent.com/creationix/nvm/v0.7.0/install.sh | sh
-        creates=/home/{{ altered_user }}/.nvm/nvm.sh
-    - name: Install node and set version
-      shell: >
-        /bin/bash -c "source ~/.nvm/nvm.sh && nvm install 18.12.0 && nvm alias default 18.12.0"
-        creates=/home/{{ altered_user }}/.nvm/alias
+      shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh
+      args:
+        executable: /bin/bash
+    
+#    - name: Install node and set version
+#      shell: >
+#        /bin/bash -c "source ~/.nvm/nvm.sh && nvm install 18.12.0 && nvm alias default 18.12.0"
+#        creates=/home/{{ altered_user }}/.nvm/alias
