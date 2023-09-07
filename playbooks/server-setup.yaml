@@ -40,19 +40,6 @@
         state: present
         key: "{{ lookup('file', lookup('env','HOME') + '/.ssh/id_ed25519.pub') }}"
     
-    - name: Copy ssh keys to remote user
-      ansible.posix.synchronize:
-        src: ~/.ssh
-        dest: /home/{{ created_username }}
-      delegate_to: "{{ inventory_hostname }}"
-    
-    - name: Change .ssh folder permissions
-      file:
-        path: /home/{{ created_username }}/.ssh
-        owner: "{{ created_username }}"
-        group: "{{ created_username }}"
-        mode: 0700
-    
     - name: Disable password authentication for root
       lineinfile:
         path: /etc/ssh/sshd_config
