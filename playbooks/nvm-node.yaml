@@ -6,9 +6,7 @@
   tasks:
 #Install node.js and nvm
     - name: Install nvm
-      shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh
-      args:
-        executable: /bin/bash
+      shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
     
 #    - name: Install node and set version
 #      shell: >
