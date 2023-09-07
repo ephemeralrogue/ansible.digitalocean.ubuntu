@@ -1,0 +1,8 @@
+- name: Execute initial server setup, Docker install
+  hosts: all
+
+- name: import server setup playbook
+  import_playbook: playbooks/server-setup.yaml
+    
+- name: import docker playbook
+  import_playbook: playbooks/docker.yaml
