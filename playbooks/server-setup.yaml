@@ -43,7 +43,7 @@
     - name: Copy ssh keys to remote user
       ansible.posix.synchronize:
         src: ~/.ssh
-        dest: /home/"{{ created_username }}"
+        dest: /home/{{ created_username }}
         rsync_opts:
           - "--chown={{ created_username}}:{{ created_username }}"
     
