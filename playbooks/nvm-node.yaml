@@ -1,9 +1,8 @@
 - name: Install NVM and node.js
   hosts: all
-  vars_files:
-    - vars/initialize.yaml
 
   tasks:
+
 #Install node.js and nvm
     - name: Install nvm
       shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
