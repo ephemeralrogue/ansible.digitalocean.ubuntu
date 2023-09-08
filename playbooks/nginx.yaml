@@ -1,0 +1,25 @@
+- name: Install Nginx and CertBot
+  hosts: webservers
+  become: true
+
+  tasks:
+
+# Install Nginx and CertBot
+    - name: Install Nginx
+      apt:
+        pkg:
+          - nginx
+          - certbot
+        state: latest
+
+# Create nginx user and group
+    - name: Create nginx group
+      group:
+        name: nginx
+
+    - name: Create nginx user
+      user:
+        name: nginx
+        groups: nginx
+        create_home: false
+        shell: /bin/false

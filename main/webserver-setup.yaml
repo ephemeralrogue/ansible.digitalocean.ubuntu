@@ -1,0 +1,22 @@
+- name: Execute initial server setup, Docker and GitHub CLI install,  Nginx and Certbot install
+  hosts: all
+
+- name: import server setup playbook
+  import_playbook: ../playbooks/server-setup.yaml
+
+- name: import docker playbook
+  import_playbook: ../playbooks/docker.yaml
+
+- name: import gh playbook
+  import_playbook: ../playbooks/gh.yaml
+
+- name: import nginx playbook
+  import_playbook: ../playbooks/nginx.yaml
+
+# Reboot managed host
+- name: Reboot the system
+  hosts: all
+
+  tasks:
+    - name: reboot
+      reboot:
