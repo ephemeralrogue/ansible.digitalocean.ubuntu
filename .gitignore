@@ -1,2 +1,1 @@
-inventory.yaml
-playbooks/vars/initialize.yaml
+vars.yaml

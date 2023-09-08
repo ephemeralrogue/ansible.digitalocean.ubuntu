@@ -1,8 +1,7 @@
 - name: Install Docker and docker-compose
   hosts: all
   become: true
-  vars_files:
-    - vars/initialize.yaml
+  vars_files: ~/ansible-automation/vars.yaml
 
   tasks:
 #Update apt and install system packages
