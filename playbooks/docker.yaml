@@ -1,10 +1,9 @@
 - name: Install Docker and docker-compose
   hosts: all
   become: true
-  vars_files:
-    - ~/ansible-automation/vars.yaml
 
   tasks:
+
 #Update apt and install system packages
     - name: Update apt and install required system packages
       apt:
@@ -40,9 +39,9 @@
       pip:
         name: docker
 
-    - name: Add "{{ altered_user }}" user to "docker" group
+    - name: Add "{{ lookup('ansible.builtin.env', 'ALTERED_USER') }}" user to "docker" group
       user:
-        name: "{{ altered_user }}"
+        name: "{{ lookup('ansible.builtin.env', 'ALTERED_USER') }}"
         groups: "docker"
         append: yes
 
