@@ -1,5 +1,5 @@
 - name: Install Nginx and CertBot
-  hosts: webservers
+  hosts: webserver
   become: true
 
   tasks:
@@ -23,3 +23,9 @@
         groups: nginx
         create_home: false
         shell: /bin/false
+
+# Update firewall rules
+    - name: UFW - Allow SSH connections
+      community.general.ufw:
+        rule: allow
+        name: "Nginx Full"

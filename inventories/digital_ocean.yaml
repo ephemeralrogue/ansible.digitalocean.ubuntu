@@ -30,22 +30,26 @@ use_private_network: true
 #
 group_variables: {}
 
+# List attributes to collect from droplets
 attributes:
   - id
   - name
   - tags
   - networks
 
+# Create groups based on tags
 keyed_groups:
   - key: do_tags | lower
     prefix: ''
     separator: ''
 
+# Create the inventory
 compose:
   ansible_host: do_networks.v4 | selectattr('type','eq','public')
     | map(attribute='ip_address') | first
   class: do_size.description | lower
   distro: do_image.distribution | lower
 
+# Filter droplets based on tags
 filters:
   - "'host' in do_tags"
