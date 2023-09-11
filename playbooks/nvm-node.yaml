@@ -6,6 +6,7 @@
 #Install node.js and nvm
     - name: Install nvm
       shell: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
+      warn: false
       args:
         creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
 
