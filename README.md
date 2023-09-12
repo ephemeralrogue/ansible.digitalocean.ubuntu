@@ -1,4 +1,4 @@
-# ansible-automation
+# ansible.digitalocean.ubuntu
 this repository houses a set of playbooks for automating the setup of servers over a set of standard Digital Ocean (DO) droplets running Ubuntu 22.04, and installing software for the development and execution of software. running it on other versions and systems may produce unexpected results.
   
 there are three parts to this repository:  
